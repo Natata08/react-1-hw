@@ -1,0 +1,39 @@
+.partners-description {
+  max-width: 30rem;
+  margin: 0.5rem 0;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.partners-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.partner-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.partner-item img {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .partners-list {
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: 1rem;
+  }
+
+  .partner-item {
+    padding: 1rem;
+  }
+}
