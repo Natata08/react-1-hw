@@ -9,15 +9,15 @@ export const Crew = () => {
       <main className='mainContent'>
         <h1>About us</h1>
         <section className='card'>
-          <h2 className={styles["card-title"]}>Our Values</h2>
+          <h2 className={styles.cardTitle}>Our Values</h2>
           <OurValues />
         </section>
         <section className='card'>
-          <h2 className={styles["card-title"]}>The crew</h2>
+          <h2 className={styles.cardTitle}>The crew</h2>
           <OurCrew />
         </section>
         <section className='card'>
-          <h2 className={styles["card-title"]}>Our partners</h2>
+          <h2 className={styles.cardTitle}>Our partners</h2>
           <OurPartners />
         </section>
       </main>

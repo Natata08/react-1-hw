@@ -1,4 +1,4 @@
-.partners-description {
+.partnersDescription {
   max-width: 30rem;
   margin: 0.5rem 0;
   text-align: left;
@@ -7,7 +7,7 @@
   line-height: 1.5;
 }
 
-.partners-list {
+.partnersList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 2rem;
@@ -15,25 +15,25 @@
   list-style-type: none;
 }
 
-.partner-item {
+.partnerItem {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
 }
 
-.partner-item img {
+.partnerItem img {
   max-width: 100%;
   object-fit: contain;
 }
 
 @media (max-width: 768px) {
-  .partners-list {
+  .partnersList {
     grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
     gap: 1rem;
   }
 
-  .partner-item {
+  .partnerItem {
     padding: 1rem;
   }
 }

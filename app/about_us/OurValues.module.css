@@ -1,4 +1,4 @@
-.values-list {
+.valuesList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
@@ -6,12 +6,12 @@
   list-style-type: none;
 }
 
-.value-item {
+.valueItem {
   border-bottom: 0.1rem solid #eee;
   padding: 1.5rem;
 }
 
-.value-title {
+.valueTitle {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,14 +20,14 @@
   font-weight: 400;
 }
 
-.value-number {
+.valueNumber {
   display: block;
   font-size: 3rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.value-description {
+.valueDescription {
   font-size: 0.8rem;
   line-height: 1.6;
   font-size: small;
@@ -35,7 +35,7 @@
 }
 
 @media (max-width: 768px) {
-  .values-list {
+  .valuesList {
     grid-template-columns: 1fr;
   }
 }

@@ -25,15 +25,15 @@ const OurValues = () => {
   ];
 
   return (
-    <ul className={styles["values-list"]}>
+    <ul className={styles.valuesList}>
       {values.map((value, index) => {
         return (
-          <li key={value.title} className={styles["value-item"]}>
-            <h3 className={styles["value-title"]}>
-              <span className={styles["value-number"]}>{`0${index + 1}`}</span>
+          <li key={value.title} className={styles.valueItem}>
+            <h3 className={styles.valueTitle}>
+              <span className={styles.valueNumber}>{`0${index + 1}`}</span>
               <span>{value.title}</span>
             </h3>
-            <p className={styles["value-description"]}>{value.description}</p>
+            <p className={styles.valueDescription}>{value.description}</p>
           </li>
         );
       })}

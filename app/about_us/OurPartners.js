@@ -14,17 +14,17 @@ const OurPartners = () => {
 
   return (
     <div>
-      <p className={styles["partners-description"]}>
+      <p className={styles.partnersDescription}>
         We collaborate with some of the most respected names in the space and
         technology industries to make every journey extraordinary.
       </p>
-      <ul className={styles["partners-list"]}>
+      <ul className={styles.partnersList}>
         {partners.map((partner) => {
           return (
-            <li key={partner} className={styles["partner-item"]}>
+            <li key={partner} className={styles.partnerItem}>
               <img
                 src={`business_partners/${partner}-logo.png`}
-                alt={`logo of ${partner}`}
+                alt={`${partner} logo`}
               ></img>
             </li>
           );

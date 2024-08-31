@@ -41,21 +41,19 @@ const OurCrew = () => {
 
   return (
     <div>
-      <p className={styles["crew-description"]}>
+      <p className={styles.crewDescription}>
         Our crew is the heart and soul of Galactica. We are a diverse team of
         seasoned space explorers, engineers, and visionaries who are united by a
         common goal: to make space travel accessible and exciting for all.
       </p>
-      <ul className={styles["members-list"]}>
+      <ul className={styles.membersList}>
         {crewMembers.map((member) => {
           return (
-            <li key={member.name} className={styles["member-item"]}>
+            <li key={member.name} className={styles.memberItem}>
               <img src={member.image} alt={`photo of ${member.name}`}></img>
-              <h3 className={styles["member-title"]}>{member.name}</h3>
-              <p className={styles["member-position"]}>{member.position}</p>
-              <p className={styles["member-description"]}>
-                {member.description}
-              </p>
+              <h3 className={styles.memberTitle}>{member.name}</h3>
+              <p className={styles.memberPosition}>{member.position}</p>
+              <p className={styles.memberDescription}>{member.description}</p>
             </li>
           );
         })}
