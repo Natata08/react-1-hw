@@ -1,0 +1,52 @@
+.crewDescription {
+  font-size: var(--font-size-base);
+  font-weight: 200;
+  line-height: 1.5;
+  max-width: 40rem;
+  margin: var(--spacing-24);
+  text-align: left;
+}
+
+.membersList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--spacing-32);
+  list-style-type: none;
+  margin: 0 var(--spacing-20);
+}
+
+.memberItem {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: var(--spacing-08);
+  align-items: flex-start;
+}
+
+.memberItem img {
+  width: 100%;
+  height: 20rem;
+  object-fit: scale-down;
+  object-position: bottom;
+  display: block;
+  background-color: var(--border-color);
+}
+
+.memberTitle {
+  font-size: var(--font-size-md);
+  font-weight: 400;
+  margin: var(--spacing-16) 0 var(--spacing-08);
+}
+
+.memberPosition {
+  font-size: var(--font-size-base);
+  font-weight: 300;
+  margin-bottom: var(--spacing-08);
+}
+
+.memberDescription {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  font-weight: 200;
+  margin-bottom: var(--spacing-16);
+}

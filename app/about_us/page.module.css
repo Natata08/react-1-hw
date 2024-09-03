@@ -1,5 +1,11 @@
 .app {
-  background-color: black;
+  background-color: var(--primary-background-color);
   width: 100vw;
   height: 100vh;
+}
+
+.cardTitle {
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: var(--font-size-md);
 }
