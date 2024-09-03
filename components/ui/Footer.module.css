@@ -19,7 +19,9 @@
   padding: var(--spacing-08) 0;
 }
 
-.footer p, .footer a, .footer li {
+.footer p,
+.footer a,
+.footer li {
   color: #000;
   font-size: medium;
   font-weight: 200;
@@ -41,8 +43,19 @@
 
 .footerList {
   list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-16);
 }
 
 .footerList li {
   padding-block: var(--spacing-04);
+}
+
+@media (max-width: 768px) {
+  .footerList {
+    flex-direction: column;
+    gap: var(--spacing-08);
+  }
 }
