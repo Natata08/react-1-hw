@@ -1,8 +1,7 @@
 .partnersDescription {
   max-width: 30rem;
-  margin: 0.5rem 0;
+  margin: var(--spacing-08) 0;
   text-align: left;
-  font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -10,7 +9,7 @@
 .partnersList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  gap: 2rem;
+  gap: var(--spacing-32);
   justify-content: center;
   list-style-type: none;
 }
@@ -19,7 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.5rem;
+  padding: var(--spacing-24);
 }
 
 .partnerItem img {
@@ -30,10 +29,10 @@
 @media (max-width: 768px) {
   .partnersList {
     grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
-    gap: 1rem;
+    gap: var(--spacing-16);
   }
 
   .partnerItem {
-    padding: 1rem;
+    padding: var(--spacing-16);
   }
 }

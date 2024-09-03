@@ -1,26 +1,25 @@
 .crewDescription {
-  font-size: 0.8rem;
+  font-size: var(--font-size-base);
   font-weight: 200;
   line-height: 1.5;
   max-width: 40rem;
-  margin: 1.5rem 1.5rem;
+  margin: var(--spacing-24);
   text-align: left;
 }
 
 .membersList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 2rem;
-  padding: 0;
+  gap: var(--spacing-32);
   list-style-type: none;
-  margin: 0 1.3rem;
+  margin: 0 var(--spacing-20);
 }
 
 .memberItem {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 0.5rem;
+  padding: var(--spacing-08);
   align-items: flex-start;
 }
 
@@ -30,30 +29,24 @@
   object-fit: scale-down;
   object-position: bottom;
   display: block;
-  background-color: #eee;
+  background-color: var(--border-color);
 }
 
 .memberTitle {
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   font-weight: 400;
-  margin: 1rem 0 0.5rem;
+  margin: var(--spacing-16) 0 var(--spacing-08);
 }
 
 .memberPosition {
-  font-size: 0.8rem;
+  font-size: var(--font-size-base);
   font-weight: 300;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--spacing-08);
 }
 
 .memberDescription {
-  font-size: 0.8rem;
+  font-size: var(--font-size-base);
   line-height: 1.5;
   font-weight: 200;
-  margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .membersList {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
+  margin-bottom: var(--spacing-16);
 }
