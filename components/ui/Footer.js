@@ -35,7 +35,7 @@ const socialMediaItems = [
 const SocialMediaItem = ({ url, title, icon }) => {
   return (
     <li>
-      <Link href={url} target='_blanc'>
+      <Link href={url} target='_blank'>
         <img src={icon} alt={`${title} logo`} width={25} height={25}></img>
       </Link>
     </li>
@@ -54,18 +54,23 @@ export const Footer = () => {
         </p>
         <p>&copy; 2024 Galactica. All rights reserved.</p>
       </div>
-      {/* TASK - React 1 week 2 */}
-      {/* Create a new List for the Pages */}
-      {/* We need to use the <Link /> component here */}
-      {/* <div className={styles.pages}>
+      <div className={styles.pages}>
         <h3>Pages</h3>
         <ul>
-          <li> <Link/> </li>
-          ...
+          <li>
+            <Link href='/'>Home</Link>
+          </li>
+          <li>
+            <Link href='/about'>About Us</Link>
+          </li>
+          <li>
+            <Link href='/destination'>Destination</Link>
+          </li>
+          <li>
+            <Link href='/nasa_collaboration'>Nasa Collaboration</Link>
+          </li>
         </ul>
-      </div> */}
-      {/* Docs for the Link: https://nextjs.org/docs/pages/api-reference/components/link */}
-
+      </div>
       <div className={styles.footerLinks}>
         <h3>Follow us</h3>
         <ul className={styles.footerList}>
