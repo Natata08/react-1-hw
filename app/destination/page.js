@@ -2,25 +2,22 @@
 
 import { useState } from "react";
 
-import styles from "@/components/destination/destination.module.css";
 import { AddWishlistItem } from "@/components/destination/AddWishlistItem";
 import planets from "./planetsInfo.js";
 import PlanetCard from "./PlanetCard";
 
 export const Destinations = () => {
-  const [selectedPlanets, onAddPlanet] = useState(["Moon"]);
+  const [selectedPlanets, setSelectedPlanets] = useState([]);
 
-  let isPlanetSelected = false;
-  let numberOfPlanets = 0;
+  let numberOfPlanets = selectedPlanets.length;
 
-  const onAddOrRemovePlanet = (name, index) => {
-    // TASK - React 1 week 2
-    // Implement this function
-    // If you press the "ADD PLANET" the selected planet should display "SELECTED"
-    // And the counter should update, how many planets are selected (numberOfPlanets)
-    console.log(
-      `You selected the following planet: ${name}, with the index of ${index}`
-    );
+  const onAddOrRemovePlanet = (name) => {
+    setSelectedPlanets((prevSelectedPlanets) => {
+      if (prevSelectedPlanets.includes(name)) {
+        return prevSelectedPlanets.filter((planet) => planet !== name);
+      }
+      return [...prevSelectedPlanets, name];
+    });
   };
 
   return (
@@ -29,11 +26,11 @@ export const Destinations = () => {
         <h1>Travel destinations</h1>
         <section className='card'>
           <h2>Wishlist</h2>
-          {/* TASK - React 1 week 2 */}
-          {/* Display the number Of selected planets */}
-          {/* Display the "no planets" message if it is empty! */}
           <p>No planets in wishlist :(</p>
-          <p>You have {numberOfPlanets} in your wishlist</p>
+          <p>
+            You have {numberOfPlanets || "no"} planet
+            {numberOfPlanets === 1 ? "" : "s"} in your wishlist
+          </p>
           <b>List coming soon after lesson 3!</b>
 
           {/* STOP! - this is for week 3!*/}
@@ -68,7 +65,7 @@ export const Destinations = () => {
               description={planet.description}
               thumbnail={planet.thumbnail}
               isSelected={selectedPlanets.includes(planet.name)}
-              onAddOrRemovePlanet={onAddOrRemovePlanet}
+              onClick={() => onAddOrRemovePlanet(planet.name)}
             />
           ))}
         </section>
