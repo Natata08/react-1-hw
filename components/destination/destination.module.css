@@ -25,6 +25,7 @@
 
 .planetDescription {
   padding-block-start: var(--spacing-04);
+  font-weight: 300;
   margin-block-end: auto;
 }
 
@@ -77,8 +78,24 @@
   font-size: small;
 }
 
-.addWishlistItem input, 
+.addWishlistItem input,
 .addWishlistItem select {
   height: 30px;
   margin-block-end: var(--spacing-20);
+}
+
+@media (max-width: 768px) {
+  .planetCard {
+    max-width: 100%;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .planetCard:nth-child(odd) {
+    margin-inline-start: 0;
+  }
+
+  .planetCard > *:last-child {
+    margin-inline-start: 0;
+  }
 }
