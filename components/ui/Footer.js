@@ -67,7 +67,7 @@ export const Footer = () => {
             <Link href='/destination'>Destination</Link>
           </li>
           <li>
-            <Link href='/nasa_collaboration'>Nasa Collaboration</Link>
+            <Link href='/nasa_collaboration'>NASA Collaboration</Link>
           </li>
         </ul>
       </div>
