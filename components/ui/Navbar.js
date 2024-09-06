@@ -28,7 +28,7 @@ const NavItem = ({ title, link, isActive, number }) => {
       })}
     >
       <Link href={link}>
-        <b>{`0${number}`}</b> {title}
+        <b>{String(number).padStart(2, "0")}</b> {title}
       </Link>
     </li>
   );
