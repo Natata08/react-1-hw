@@ -28,7 +28,7 @@ const NavItem = ({ title, link, isActive, number }) => {
       })}
     >
       <Link href={link}>
-        <b>{String(number).padStart(2, "0")}</b> {title}
+        <b>{number}</b> {title}
       </Link>
     </li>
   );
@@ -54,7 +54,7 @@ export const Navbar = () => {
               title={navbarItem.title}
               link={navbarItem.link}
               isActive={navbarItem.link === currentPath}
-              number={index + 1}
+              number={String(index + 1).padStart(2, "0")}
             />
           ))}
           {/* TASK - React 1 week 3 */}
