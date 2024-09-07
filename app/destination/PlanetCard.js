@@ -1,6 +1,12 @@
 import styles from "@/components/destination/destination.module.css";
 
-const PlanetCard = ({ name, description, thumbnail, isSelected, ...props }) => {
+const PlanetCard = ({
+  name,
+  description,
+  thumbnail,
+  isSelected,
+  onAddOrRemovePlanet,
+}) => {
   return (
     <div className={styles.planetCard}>
       <img className={styles.planetThumbnail} src={thumbnail} alt='' />
@@ -10,7 +16,7 @@ const PlanetCard = ({ name, description, thumbnail, isSelected, ...props }) => {
         </h2>
         <p>{description}</p>
       </div>
-      <button className='roundButton' {...props}>
+      <button className='roundButton' onClick={onAddOrRemovePlanet}>
         {isSelected ? "REMOVE" : "ADD PLANET"}
       </button>
     </div>

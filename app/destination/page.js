@@ -11,7 +11,7 @@ export const Destinations = () => {
 
   let numberOfPlanets = selectedPlanets.length;
 
-  const onAddOrRemovePlanet = (name) => {
+  const handleAddOrRemovePlanet = (name) => {
     setSelectedPlanets((prevSelectedPlanets) => {
       if (prevSelectedPlanets.includes(name)) {
         return prevSelectedPlanets.filter((planet) => planet !== name);
@@ -64,7 +64,7 @@ export const Destinations = () => {
               description={planet.description}
               thumbnail={planet.thumbnail}
               isSelected={selectedPlanets.includes(planet.name)}
-              onClick={() => onAddOrRemovePlanet(planet.name)}
+              onAddOrRemovePlanet={() => handleAddOrRemovePlanet(planet.name)}
             />
           ))}
         </section>
