@@ -30,7 +30,9 @@ const OurValues = () => {
         return (
           <li key={value.title} className={styles.valueItem}>
             <h3 className={styles.valueTitle}>
-              <span className={styles.valueNumber}>{`0${index + 1}`}</span>
+              <span className={styles.valueNumber}>
+                {String(index + 1).padStart(2, "0")}
+              </span>
               <span>{value.title}</span>
             </h3>
             <p className={styles.valueDescription}>{value.description}</p>

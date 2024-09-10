@@ -186,6 +186,7 @@ button {
   min-width: 100px;
   line-height: 100px;
   cursor: pointer;
+  color: #000;
   background-color: white;
   border-radius: 50%;
   font-size: 8px;
