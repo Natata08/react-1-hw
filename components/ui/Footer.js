@@ -4,6 +4,25 @@ import { usePathname } from "next/navigation";
 import styles from "./Footer.module.css";
 import Link from "next/link";
 
+const footerPageItems = [
+  {
+    title: "Home",
+    link: "/",
+  },
+  {
+    title: "About Us",
+    link: "/about_us",
+  },
+  {
+    title: "Destination",
+    link: "/destination",
+  },
+  {
+    title: "NASA Collaboration",
+    link: "/nasa_collaboration",
+  },
+];
+
 const socialMediaItems = [
   {
     url: "https://facebook.com",
@@ -57,18 +76,11 @@ export const Footer = () => {
       <div className={styles.pages}>
         <h3>Pages</h3>
         <ul>
-          <li>
-            <Link href='/'>Home</Link>
-          </li>
-          <li>
-            <Link href='/about'>About Us</Link>
-          </li>
-          <li>
-            <Link href='/destination'>Destination</Link>
-          </li>
-          <li>
-            <Link href='/nasa_collaboration'>NASA Collaboration</Link>
-          </li>
+          {footerPageItems.map((footerPageItem, index) => (
+            <li key={`footerPageItem-${index}`}>
+              <Link href={footerPageItem.link}>{footerPageItem.title}</Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div className={styles.footerLinks}>
