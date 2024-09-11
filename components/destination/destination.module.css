@@ -55,6 +55,8 @@
 }
 .wishlistList {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: var(--spacing-16) 0;
 }
 
