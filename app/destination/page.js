@@ -2,22 +2,32 @@
 
 import { useState } from "react";
 
+import styles from "@/components/destination/destination.module.css";
+
 import { AddWishlistItem } from "@/components/destination/AddWishlistItem";
 import planets from "./planetsInfo.js";
 import PlanetCard from "./PlanetCard";
+import PlanetWishlistItem from "./PlanetWishlistItem.js";
 
 export const Destinations = () => {
-  const [selectedPlanets, setSelectedPlanets] = useState([]);
+  // const [selectedPlanets, setSelectedPlanets] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
-  let numberOfPlanets = selectedPlanets.length;
+  let numberOfPlanets = wishlist.length;
 
   const handleAddOrRemovePlanet = (name) => {
-    setSelectedPlanets((prevSelectedPlanets) => {
-      if (prevSelectedPlanets.includes(name)) {
-        return prevSelectedPlanets.filter((planet) => planet !== name);
+    setWishlist((prevWishlist) => {
+      if (prevWishlist.includes(name)) {
+        return prevWishlist.filter((planet) => planet !== name);
       }
-      return [...prevSelectedPlanets, name];
+      return [...prevWishlist, name];
     });
+  };
+
+  const removeFromWishlist = (name) => {
+    setWishlist((prevWishlist) =>
+      prevWishlist.filter((planet) => planet !== name)
+    );
   };
 
   return (
@@ -30,30 +40,31 @@ export const Destinations = () => {
             You have {numberOfPlanets || "no"} planet
             {numberOfPlanets === 1 ? "" : "s"} in your wishlist
           </p>
-          <b>List coming soon after lesson 3!</b>
 
           {/* STOP! - this is for week 3!*/}
           {/* TASK - React 1 week 3 */}
           {/* Import the AddWishlistItem react component */}
           {/* <AddWishlistItem /> */}
+
           {/* TASK - React 1 week 3 */}
           {/* Convert the list, so it is using selectedPlanets.map() to display the items  */}
           {/* Implement the "REMOVE" function */}
           {/* uncomment the following code snippet: */}
-          {/* 
-          <h3>Your current wishlist</h3>
-          <div className={styles.wishlistList}>
-            <PlanetWishlistItem 
-              name="europa"
-              onRemove={() => removeFromWishlist('europa')}
-              thumbnail="/destination/image-europa.png"
-            />
-            <PlanetWishlistItem 
-              name="europa"
-              onRemove={() => removeFromWishlist('europa')}
-              thumbnail="/destination/image-europa.png"
-            />
-          </div> */}
+
+          {numberOfPlanets && (
+            <div>
+              <h3>Your current wishlist</h3>
+              <div className={styles.wishlistList}>
+                {wishlist.map((planet) => (
+                  <PlanetWishlistItem
+                    name={planet}
+                    onRemove={() => removeFromWishlist(planet)}
+                    thumbnail={`/destination/image-${planet}.png`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </section>
         <section className='card'>
           <h2>Possible destinations</h2>
@@ -63,7 +74,7 @@ export const Destinations = () => {
               name={planet.name}
               description={planet.description}
               thumbnail={planet.thumbnail}
-              isSelected={selectedPlanets.includes(planet.name)}
+              isSelected={wishlist.includes(planet.name)}
               onAddOrRemovePlanet={() => handleAddOrRemovePlanet(planet.name)}
             />
           ))}
