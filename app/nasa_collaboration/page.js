@@ -15,12 +15,25 @@ export const NasaCollaboration = () => {
   const [dailyImg, setDailyImg] = useState({});
   const [roverPhoto, setRoverPhoto] = useState({});
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
   useEffect(() => {
     const fetchRoverPhotos = async () => {
-      const roverPhotoResponse = await fetch(NASA_URLs.marsRoverPhoto).then(
-        (response) => response.json()
-      );
-      setRoverPhoto(roverPhotoResponse);
+      setIsLoading(true);
+      try {
+        const roverPhotoResponse = await fetch(NASA_URLs.marsRoverPhoto);
+        if (roverPhotoResponse.ok) {
+          const result = await roverPhotoResponse.json();
+          setRoverPhoto(result);
+        } else {
+          setError("Failed to load rover photos");
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     const fetchAstronomyPicOfTheDay = async () => {
@@ -33,6 +46,31 @@ export const NasaCollaboration = () => {
     fetchAstronomyPicOfTheDay();
     fetchRoverPhotos();
   }, []);
+
+  const renderRoverPhotosContent = () => {
+    if (isLoading) {
+      return <p>Loading rover photos...</p>;
+    }
+
+    if (error) {
+      return <p>Error: {error}</p>;
+    }
+
+    if (roverPhoto?.photos?.length) {
+      return (
+        <ul className={styles.roverPhotos}>
+          {roverPhoto.photos.map((photo, index) => (
+            <RoverPhoto
+              key={`roverPhoto-${index}`}
+              src={photo.img_src}
+              date={photo.earth_date}
+              roverName={photo.rover.name}
+            />
+          ))}
+        </ul>
+      );
+    }
+  };
 
   return (
     <div className='fullBGpicture'>
@@ -54,22 +92,10 @@ export const NasaCollaboration = () => {
             <p>Loading astronomy picture of the day...</p>
           )}
         </section>
+
         <section className='card'>
           <h2>Rover Photos</h2>
-          {roverPhoto?.photos?.length ? (
-            <ul className={styles.roverPhotos}>
-              {roverPhoto?.photos?.map((photo, index) => (
-                <RoverPhoto
-                  key={`roverPhoto-${index}`}
-                  src={photo.img_src}
-                  date={photo.earth_date}
-                  roverName={photo.rover.name}
-                />
-              ))}
-            </ul>
-          ) : (
-            <p>Loading rover photos...</p>
-          )}
+          {renderRoverPhotosContent()}
         </section>
       </main>
     </div>
