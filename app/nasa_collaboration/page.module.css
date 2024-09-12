@@ -29,3 +29,8 @@
   height: auto;
   max-height: 200px;
 }
+
+.roverPhotos p {
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+}
