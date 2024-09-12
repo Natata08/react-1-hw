@@ -40,7 +40,7 @@ export const Destinations = () => {
             You have {numberOfPlanets || "no"} planet
             {numberOfPlanets === 1 ? "" : "s"} in your wishlist
           </p>
-
+          <AddWishlistItem />
           {/* STOP! - this is for week 3!*/}
           {/* TASK - React 1 week 3 */}
           {/* Import the AddWishlistItem react component */}
