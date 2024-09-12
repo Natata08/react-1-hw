@@ -7,7 +7,7 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
   const [wishlistCustomName, setWishlistCustomName] = useState("");
   const [thumbnail, setThumbnail] = useState("/destination/image-europa.png");
 
-  const handleInput = (event) => {
+  const onChangeInput = (event) => {
     setWishlistCustomName(event.target.value);
   };
 
@@ -22,6 +22,8 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
     }
   };
 
+  const isButtonDisabled = wishlistCustomName.trim() === "";
+
   return (
     <div className={styles.addWishlistItem}>
       <p>Add custom planet to wishlist</p>
@@ -30,7 +32,7 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
         id='customWishlist'
         type='text'
         value={wishlistCustomName}
-        onChange={handleInput}
+        onChange={onChangeInput}
         required
       />
       <label htmlFor='customWishlistThumbnail'>Wishlist item thumbnail</label>
@@ -40,7 +42,9 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
         <option value='/destination/image-moon.png'>MOON</option>
         <option value='/destination/image-titan.png'>TITAN</option>
       </select>
-      <button onClick={onAddItemPressed}>ADD CUSTOM</button>
+      <button onClick={onAddItemPressed} disabled={isButtonDisabled}>
+        ADD CUSTOM
+      </button>
     </div>
   );
 };
