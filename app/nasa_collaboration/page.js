@@ -84,6 +84,8 @@ export const NasaCollaboration = () => {
         </>
       );
     }
+
+    return <p>No astronomy picture of the day available</p>;
   };
 
   const renderRoverPhotosContent = () => {
@@ -109,6 +111,8 @@ export const NasaCollaboration = () => {
         </ul>
       );
     }
+
+    return <p>No rover photos available</p>;
   };
 
   return (
