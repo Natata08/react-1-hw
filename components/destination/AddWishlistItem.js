@@ -16,11 +16,10 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
   };
 
   const onAddItemPressed = () => {
-    // TASK - React 1 week 3
-    // implement this function
-    // Clear the <input/> field on button press
-    // pass the thumbnail and the name from the input to the onAddWishlistItem function
-    // call the onAddWishlistItem here
+    if (wishlistCustomName.trim()) {
+      onAddWishlistItem(wishlistCustomName, thumbnail);
+      setWishlistCustomName("");
+    }
   };
 
   return (

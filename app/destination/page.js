@@ -28,8 +28,15 @@ export const Destinations = () => {
 
   const removeFromWishlist = (name) => {
     setWishlist((prevWishlist) =>
-      prevWishlist.filter((planet) => planet !== name)
+      prevWishlist.filter((planet) => planet.name !== name)
     );
+  };
+
+  const handleAddCustomPlanet = (name, thumbnail) => {
+    setWishlist((prevWishlist) => [
+      ...prevWishlist,
+      { name: name, thumbnail: thumbnail },
+    ]);
   };
 
   return (
@@ -42,7 +49,7 @@ export const Destinations = () => {
             You have {numberOfPlanets || "no"} planet
             {numberOfPlanets === 1 ? "" : "s"} in your wishlist
           </p>
-          <AddWishlistItem />
+          <AddWishlistItem onAddWishlistItem={handleAddCustomPlanet} />
           {/* STOP! - this is for week 3!*/}
           {/* TASK - React 1 week 3 */}
           {/* Import the AddWishlistItem react component */}
@@ -56,7 +63,7 @@ export const Destinations = () => {
                   <PlanetWishlistItem
                     key={`planetWishlistItem-${index}`}
                     name={planet.name}
-                    onRemove={() => removeFromWishlist(wishlist, planet)}
+                    onRemove={() => removeFromWishlist(planet.name)}
                     thumbnail={planet.thumbnail}
                   />
                 ))}
