@@ -15,10 +15,6 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
     setThumbnail(event.target.value);
   };
 
-  // TASK - React 1 week 3
-  // 1. Add a useState for the handling the <input id="customWishlist" type="text" />
-  // 2. Connect the onThumbnailChange to the <select>
-
   const onAddItemPressed = () => {
     // TASK - React 1 week 3
     // implement this function
@@ -45,7 +41,7 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
         <option value='/destination/image-moon.png'>MOON</option>
         <option value='/destination/image-titan.png'>TITAN</option>
       </select>
-      <button>ADD CUSTOM</button>
+      <button onClick={onAddItemPressed}>ADD CUSTOM</button>
     </div>
   );
 };

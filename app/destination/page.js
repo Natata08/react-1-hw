@@ -10,17 +10,19 @@ import PlanetCard from "./PlanetCard";
 import PlanetWishlistItem from "./PlanetWishlistItem.js";
 
 export const Destinations = () => {
-  // const [selectedPlanets, setSelectedPlanets] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
   let numberOfPlanets = wishlist.length;
 
-  const handleAddOrRemovePlanet = (name) => {
+  const isPlanetSelected = (wishlist, planetName) =>
+    wishlist.some((item) => item.name === planetName);
+
+  const handleAddOrRemovePlanet = (name, thumbnail) => {
     setWishlist((prevWishlist) => {
-      if (prevWishlist.includes(name)) {
-        return prevWishlist.filter((planet) => planet !== name);
+      if (isPlanetSelected(prevWishlist, name)) {
+        return prevWishlist.filter((planet) => planet.name !== name);
       }
-      return [...prevWishlist, name];
+      return [...prevWishlist, { name: name, thumbnail: thumbnail }];
     });
   };
 
@@ -53,9 +55,9 @@ export const Destinations = () => {
                 {wishlist.map((planet, index) => (
                   <PlanetWishlistItem
                     key={`planetWishlistItem-${index}`}
-                    name={planet}
-                    onRemove={() => removeFromWishlist(planet)}
-                    thumbnail={`/destination/image-${planet}.png`}
+                    name={planet.name}
+                    onRemove={() => removeFromWishlist(wishlist, planet)}
+                    thumbnail={planet.thumbnail}
                   />
                 ))}
               </ul>
@@ -64,14 +66,16 @@ export const Destinations = () => {
         </section>
         <section className='card'>
           <h2>Possible destinations</h2>
-          {planets.map((planet) => (
+          {planets.map(({ name, description, thumbnail }, index) => (
             <PlanetCard
-              key={planet.name}
-              name={planet.name}
-              description={planet.description}
-              thumbnail={planet.thumbnail}
-              isSelected={wishlist.includes(planet.name)}
-              onAddOrRemovePlanet={() => handleAddOrRemovePlanet(planet.name)}
+              key={`planetCard-${index}`}
+              name={name}
+              description={description}
+              thumbnail={thumbnail}
+              isSelected={isPlanetSelected(wishlist, name)}
+              onAddOrRemovePlanet={() =>
+                handleAddOrRemovePlanet(name, thumbnail)
+              }
             />
           ))}
         </section>
