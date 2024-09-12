@@ -15,45 +15,84 @@ export const NasaCollaboration = () => {
   const [dailyImg, setDailyImg] = useState({});
   const [roverPhoto, setRoverPhoto] = useState({});
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [isLoadingDailyImg, setIsLoadingDailyImg] = useState(false);
+  const [isLoadingRover, setIsLoadingRover] = useState(false);
+
+  const [dailyImgError, setDailyImgError] = useState("");
+  const [roverError, setRoverError] = useState("");
+
+  useEffect(() => {
+    const fetchDailyImg = async () => {
+      setIsLoadingDailyImg(true);
+      try {
+        const dailyImgResponse = await fetch(NASA_URLs.astronomyPicOfTheDay);
+        if (dailyImgResponse.ok) {
+          const result = await dailyImgResponse.json();
+          setDailyImg(result);
+        } else {
+          setDailyImgError("Failed to load astronomy picture of the day");
+        }
+      } catch (error) {
+        setDailyImgError(error.message);
+      } finally {
+        setIsLoadingDailyImg(false);
+      }
+    };
+
+    fetchDailyImg();
+  }, []);
 
   useEffect(() => {
     const fetchRoverPhotos = async () => {
-      setIsLoading(true);
+      setIsLoadingRover(true);
       try {
         const roverPhotoResponse = await fetch(NASA_URLs.marsRoverPhoto);
         if (roverPhotoResponse.ok) {
           const result = await roverPhotoResponse.json();
           setRoverPhoto(result);
         } else {
-          setError("Failed to load rover photos");
+          setRoverError("Failed to load rover photos");
         }
       } catch (error) {
-        setError(error.message);
+        setRoverError(error.message);
       } finally {
-        setIsLoading(false);
+        setIsLoadingRover(false);
       }
     };
-
-    const fetchAstronomyPicOfTheDay = async () => {
-      const astronomyPicOfTheDayResponse = await fetch(
-        NASA_URLs.astronomyPicOfTheDay
-      ).then((response) => response.json());
-      setDailyImg(astronomyPicOfTheDayResponse);
-    };
-
-    fetchAstronomyPicOfTheDay();
     fetchRoverPhotos();
   }, []);
 
+  const renderDailyImageContent = () => {
+    if (isLoadingDailyImg) {
+      return <p>Loading astronomy picture of the day...</p>;
+    }
+
+    if (dailyImgError) {
+      return <p>Error: {dailyImgError}</p>;
+    }
+
+    if (dailyImg.url) {
+      return (
+        <>
+          <h3>{dailyImg.title}</h3>
+          <img
+            className={styles.nasaPicOfTheDayImg}
+            src={dailyImg.url}
+            alt={`NASA photo of ${dailyImg.title}`}
+          />
+          <p className={styles.explanation}>{dailyImg.explanation}</p>
+        </>
+      );
+    }
+  };
+
   const renderRoverPhotosContent = () => {
-    if (isLoading) {
+    if (isLoadingRover) {
       return <p>Loading rover photos...</p>;
     }
 
-    if (error) {
-      return <p>Error: {error}</p>;
+    if (roverError) {
+      return <p>Error: {roverError}</p>;
     }
 
     if (roverPhoto?.photos?.length) {
@@ -78,19 +117,7 @@ export const NasaCollaboration = () => {
         <h1>Collaboration with NASA</h1>
         <section className='card'>
           <h2>Astronomy Picture of the day</h2>
-          {dailyImg.url ? (
-            <>
-              <h3>{dailyImg.title}</h3>
-              <img
-                className={styles.nasaPicOfTheDayImg}
-                src={dailyImg.url}
-                alt={`NASA photo of ${dailyImg.title}`}
-              />
-              <p className={styles.explanation}>{dailyImg.explanation}</p>
-            </>
-          ) : (
-            <p>Loading astronomy picture of the day...</p>
-          )}
+          {renderDailyImageContent()}
         </section>
 
         <section className='card'>
