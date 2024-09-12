@@ -4,9 +4,33 @@
   height: 100vh;
 }
 
-
 .nasaPicOfTheDayImg {
-  width: auto;
-  height: 400px;
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+}
 
+.explanation {
+  line-height: 1.5;
+  font-size: var(--font-size-md);
+  font-weight: 300;
+}
+
+.roverPhotos {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
+  list-style-type: none;
+}
+
+.roverPhotos img {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+}
+
+.roverPhotos p {
+  font-size: var(--font-size-sm);
+  font-weight: 300;
 }
