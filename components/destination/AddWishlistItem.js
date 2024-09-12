@@ -17,7 +17,7 @@ export const AddWishlistItem = ({ onAddWishlistItem }) => {
 
   const onAddItemPressed = () => {
     if (wishlistCustomName.trim()) {
-      onAddWishlistItem(wishlistCustomName, thumbnail);
+      onAddWishlistItem(wishlistCustomName.toLowerCase().trim(), thumbnail);
       setWishlistCustomName("");
     }
   };

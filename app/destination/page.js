@@ -14,29 +14,20 @@ export const Destinations = () => {
 
   let numberOfPlanets = wishlist.length;
 
-  const isPlanetSelected = (wishlist, planetName) =>
+  const isPlanetSelected = (planetName) =>
     wishlist.some((item) => item.name === planetName);
 
-  const handleAddOrRemovePlanet = (name, thumbnail) => {
+  const handleWishlistUpdate = (name, thumbnail = null, onRemove = false) => {
     setWishlist((prevWishlist) => {
-      if (isPlanetSelected(prevWishlist, name)) {
+      if (onRemove) {
         return prevWishlist.filter((planet) => planet.name !== name);
+      } else {
+        if (!isPlanetSelected(name)) {
+          return [...prevWishlist, { name, thumbnail }];
+        }
+        return prevWishlist;
       }
-      return [...prevWishlist, { name: name, thumbnail: thumbnail }];
     });
-  };
-
-  const removeFromWishlist = (name) => {
-    setWishlist((prevWishlist) =>
-      prevWishlist.filter((planet) => planet.name !== name)
-    );
-  };
-
-  const handleAddCustomPlanet = (name, thumbnail) => {
-    setWishlist((prevWishlist) => [
-      ...prevWishlist,
-      { name: name, thumbnail: thumbnail },
-    ]);
   };
 
   return (
@@ -49,13 +40,9 @@ export const Destinations = () => {
             You have {numberOfPlanets || "no"} planet
             {numberOfPlanets === 1 ? "" : "s"} in your wishlist
           </p>
-          <AddWishlistItem onAddWishlistItem={handleAddCustomPlanet} />
-          {/* STOP! - this is for week 3!*/}
-          {/* TASK - React 1 week 3 */}
-          {/* Import the AddWishlistItem react component */}
-          {/* <AddWishlistItem /> */}
+          <AddWishlistItem onAddWishlistItem={handleWishlistUpdate} />
 
-          {numberOfPlanets && (
+          {numberOfPlanets > 0 && (
             <div>
               <h3>Your current wishlist</h3>
               <ul className={styles.wishlistList}>
@@ -63,7 +50,9 @@ export const Destinations = () => {
                   <PlanetWishlistItem
                     key={`planetWishlistItem-${index}`}
                     name={planet.name}
-                    onRemove={() => removeFromWishlist(planet.name)}
+                    onRemove={() =>
+                      handleWishlistUpdate(planet.name, null, true)
+                    }
                     thumbnail={planet.thumbnail}
                   />
                 ))}
@@ -79,9 +68,9 @@ export const Destinations = () => {
               name={name}
               description={description}
               thumbnail={thumbnail}
-              isSelected={isPlanetSelected(wishlist, name)}
+              isSelected={isPlanetSelected(name)}
               onAddOrRemovePlanet={() =>
-                handleAddOrRemovePlanet(name, thumbnail)
+                handleWishlistUpdate(name, thumbnail, isPlanetSelected(name))
               }
             />
           ))}
