@@ -28,7 +28,7 @@ const NavItem = ({ title, link, isActive, number }) => {
       })}
     >
       <Link href={link}>
-        <b>{number}</b> {title}
+        <b>{String(number).padStart(2, "0")}</b> {title}
       </Link>
     </li>
   );
@@ -54,11 +54,9 @@ export const Navbar = () => {
               title={navbarItem.title}
               link={navbarItem.link}
               isActive={navbarItem.link === currentPath}
-              number={String(index + 1).padStart(2, "0")}
+              number={index + 1}
             />
           ))}
-          {/* TASK - React 1 week 3 */}
-          {/* replace repeating content by using navbarItems.map(() => <NavLink />) */}
         </ul>
       </nav>
     </header>

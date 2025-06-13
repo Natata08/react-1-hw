@@ -2,21 +2,31 @@
 
 import { useState } from "react";
 
+import styles from "@/components/destination/destination.module.css";
+
 import { AddWishlistItem } from "@/components/destination/AddWishlistItem";
 import planets from "./planetsInfo.js";
 import PlanetCard from "./PlanetCard";
+import PlanetWishlistItem from "./PlanetWishlistItem.js";
 
 export const Destinations = () => {
-  const [selectedPlanets, setSelectedPlanets] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
-  let numberOfPlanets = selectedPlanets.length;
+  let numberOfPlanets = wishlist.length;
 
-  const handleAddOrRemovePlanet = (name) => {
-    setSelectedPlanets((prevSelectedPlanets) => {
-      if (prevSelectedPlanets.includes(name)) {
-        return prevSelectedPlanets.filter((planet) => planet !== name);
+  const isPlanetSelected = (planetName) =>
+    wishlist.some((item) => item.name === planetName);
+
+  const handleWishlistUpdate = (name, thumbnail = null, onRemove = false) => {
+    setWishlist((prevWishlist) => {
+      if (onRemove) {
+        return prevWishlist.filter((planet) => planet.name !== name);
+      } else {
+        if (!isPlanetSelected(name)) {
+          return [...prevWishlist, { name, thumbnail }];
+        }
+        return prevWishlist;
       }
-      return [...prevSelectedPlanets, name];
     });
   };
 
@@ -30,41 +40,38 @@ export const Destinations = () => {
             You have {numberOfPlanets || "no"} planet
             {numberOfPlanets === 1 ? "" : "s"} in your wishlist
           </p>
-          <b>List coming soon after lesson 3!</b>
+          <AddWishlistItem onAddWishlistItem={handleWishlistUpdate} />
 
-          {/* STOP! - this is for week 3!*/}
-          {/* TASK - React 1 week 3 */}
-          {/* Import the AddWishlistItem react component */}
-          {/* <AddWishlistItem /> */}
-          {/* TASK - React 1 week 3 */}
-          {/* Convert the list, so it is using selectedPlanets.map() to display the items  */}
-          {/* Implement the "REMOVE" function */}
-          {/* uncomment the following code snippet: */}
-          {/* 
-          <h3>Your current wishlist</h3>
-          <div className={styles.wishlistList}>
-            <PlanetWishlistItem 
-              name="europa"
-              onRemove={() => removeFromWishlist('europa')}
-              thumbnail="/destination/image-europa.png"
-            />
-            <PlanetWishlistItem 
-              name="europa"
-              onRemove={() => removeFromWishlist('europa')}
-              thumbnail="/destination/image-europa.png"
-            />
-          </div> */}
+          {numberOfPlanets > 0 && (
+            <div>
+              <h3>Your current wishlist</h3>
+              <ul className={styles.wishlistList}>
+                {wishlist.map((planet, index) => (
+                  <PlanetWishlistItem
+                    key={`planetWishlistItem-${index}`}
+                    name={planet.name}
+                    onRemove={() =>
+                      handleWishlistUpdate(planet.name, null, true)
+                    }
+                    thumbnail={planet.thumbnail}
+                  />
+                ))}
+              </ul>
+            </div>
+          )}
         </section>
         <section className='card'>
           <h2>Possible destinations</h2>
-          {planets.map((planet) => (
+          {planets.map(({ name, description, thumbnail }, index) => (
             <PlanetCard
-              key={planet.name}
-              name={planet.name}
-              description={planet.description}
-              thumbnail={planet.thumbnail}
-              isSelected={selectedPlanets.includes(planet.name)}
-              onAddOrRemovePlanet={() => handleAddOrRemovePlanet(planet.name)}
+              key={`planetCard-${index}`}
+              name={name}
+              description={description}
+              thumbnail={thumbnail}
+              isSelected={isPlanetSelected(name)}
+              onAddOrRemovePlanet={() =>
+                handleWishlistUpdate(name, thumbnail, isPlanetSelected(name))
+              }
             />
           ))}
         </section>
